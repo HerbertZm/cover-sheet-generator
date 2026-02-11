@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Sheet Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Cover Sheet Generator</h1>
+        
+        <div class="day-selector">
+            <button class="day-btn" data-day="THU">THU</button>
+            <button class="day-btn" data-day="FRI">FRI</button>
+            <button class="day-btn active" data-day="SAT">SAT</button>
+            <button class="day-btn" data-day="SUN">SUN</button>
+        </div>
+
+        <div class="input-section">
+            <label for="events-input">Enter Events (one per line, format: Start Time - Event Name)</label>
+            <textarea id="events-input" placeholder="Example:&#10;10:00 AM	Team Trios&#10;2:00 PM	Standard&#10;6:00 PM	Draft"></textarea>
+            <div class="help-text">Enter each event on a new line. Format: Time - Event Name (e.g., "10:00 AM	Team Trios")</div>
+        </div>
+
+        <button class="generate-btn" onclick="parseEvents()">Parse Events</button>
+
+        <div class="events-list" id="events-list"></div>
+
+        <button class="generate-btn" id="generate-pdf-btn" onclick="generatePDF()" style="display: none;">Generate PDF</button>
+
+        <div class="preview-section" id="preview-section" style="display: none;">
+            <h2>PDF Preview</h2>
+            <div class="preview-controls">
+                <button class="generate-btn" onclick="downloadPDF()">Download PDF</button>
+            </div>
+            <iframe id="pdf-preview" class="pdf-preview"></iframe>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

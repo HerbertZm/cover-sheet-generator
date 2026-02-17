@@ -18,6 +18,42 @@
             <button class="day-btn" data-day="SUN">SUN</button>
         </div>
 
+        <div class="logo-section">
+            <label>Logo Watermark (optional)</label>
+            <div class="logo-controls">
+                <div class="logo-upload-area" id="logo-upload-area">
+                    <input type="file" id="logo-input" accept="image/*" onchange="handleLogoUpload(event)" hidden>
+                    <div class="logo-placeholder" id="logo-placeholder" onclick="document.getElementById('logo-input').click()">
+                        <span class="logo-icon">&#128247;</span>
+                        <span>Click to upload logo</span>
+                    </div>
+                    <div class="logo-preview-container" id="logo-preview-container" style="display:none;">
+                        <img id="logo-preview-img" class="logo-preview-img" alt="Logo preview">
+                        <button class="logo-remove-btn" onclick="removeLogo()" title="Remove logo">&times;</button>
+                    </div>
+                </div>
+                <div class="logo-options">
+                    <label class="logo-option-label">Position</label>
+                    <div class="position-grid">
+                        <button class="pos-btn active" data-pos="top-left" onclick="setLogoPosition('top-left')">&#8598; Top Left</button>
+                        <button class="pos-btn" data-pos="top-right" onclick="setLogoPosition('top-right')">&#8599; Top Right</button>
+                        <button class="pos-btn" data-pos="bottom-left" onclick="setLogoPosition('bottom-left')">&#8601; Bottom Left</button>
+                        <button class="pos-btn" data-pos="bottom-right" onclick="setLogoPosition('bottom-right')">&#8600; Bottom Right</button>
+                    </div>
+                    <label class="logo-option-label" for="logo-opacity">Opacity</label>
+                    <div class="opacity-control">
+                        <input type="range" id="logo-opacity" min="5" max="50" value="20" oninput="setLogoOpacity(this.value)">
+                        <span id="opacity-value">20%</span>
+                    </div>
+                    <label class="logo-option-label" for="logo-size">Size (mm)</label>
+                    <div class="opacity-control">
+                        <input type="range" id="logo-size" min="20" max="120" value="50" oninput="setLogoSize(this.value)">
+                        <span id="size-value">50mm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="input-section">
             <label for="events-input">Enter Events (one per line, format: Start Time - Event Name)</label>
             <textarea id="events-input" placeholder="Example:&#10;10:00 AM	Team Trios&#10;2:00 PM	Standard&#10;6:00 PM	Draft"></textarea>

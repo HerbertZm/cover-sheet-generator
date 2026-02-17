@@ -2,6 +2,58 @@ let selectedDay = 'SAT';
 let events = [];
 let currentPDFBlob = null;
 
+// Logo state
+let logoDataUrl = null;
+let logoPosition = 'top-left';
+let logoOpacity = 20;  // percent
+let logoSizeMM = 50;   // millimeters
+
+function handleLogoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+        alert('Please upload an image file.');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        logoDataUrl = e.target.result;
+        document.getElementById('logo-preview-img').src = logoDataUrl;
+        document.getElementById('logo-placeholder').style.display = 'none';
+        document.getElementById('logo-preview-container').style.display = 'block';
+        updatePreview();
+    };
+    reader.readAsDataURL(file);
+}
+
+function removeLogo() {
+    logoDataUrl = null;
+    document.getElementById('logo-input').value = '';
+    document.getElementById('logo-placeholder').style.display = 'flex';
+    document.getElementById('logo-preview-container').style.display = 'none';
+    updatePreview();
+}
+
+function setLogoPosition(pos) {
+    logoPosition = pos;
+    document.querySelectorAll('.pos-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.pos-btn[data-pos="${pos}"]`).classList.add('active');
+    updatePreview();
+}
+
+function setLogoOpacity(val) {
+    logoOpacity = parseInt(val);
+    document.getElementById('opacity-value').textContent = val + '%';
+    updatePreview();
+}
+
+function setLogoSize(val) {
+    logoSizeMM = parseInt(val);
+    document.getElementById('size-value').textContent = val + 'mm';
+    updatePreview();
+}
+
 // Day selector
 document.querySelectorAll('.day-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -126,6 +178,46 @@ function createPDF() {
     const pageHeight = doc.internal.pageSize.getHeight();
     const margin = 10; // Reduced margin
 
+    // Helper to draw logo watermark on the current page
+    function drawLogoWatermark() {
+        if (!logoDataUrl) return;
+
+        const logoW = logoSizeMM;
+        // Maintain aspect ratio: use a square bounding box (image will be scaled by jsPDF)
+        const logoH = logoSizeMM;
+        const pad = 10; // mm padding from edge
+        let x, y;
+
+        switch (logoPosition) {
+            case 'top-left':
+                x = pad;
+                y = pad;
+                break;
+            case 'top-right':
+                x = pageWidth - logoW - pad;
+                y = pad;
+                break;
+            case 'bottom-left':
+                x = pad;
+                y = pageHeight - logoH - pad;
+                break;
+            case 'bottom-right':
+                x = pageWidth - logoW - pad;
+                y = pageHeight - logoH - pad;
+                break;
+            default:
+                x = pad;
+                y = pad;
+        }
+
+        // jsPDF supports opacity via GState
+        const gState = new doc.GState({ opacity: logoOpacity / 100 });
+        doc.saveGraphicsState();
+        doc.setGState(gState);
+        doc.addImage(logoDataUrl, 'PNG', x, y, logoW, logoH);
+        doc.restoreGraphicsState();
+    }
+
     events.forEach((event, index) => {
         if (index > 0) {
             doc.addPage();
@@ -230,6 +322,9 @@ function createPDF() {
         doc.setFont(undefined, 'bold');
         doc.setTextColor(0, 0, 0);
         doc.text('Additional Information', rightColumnX, currentY);
+
+        // Draw logo watermark on this page (rendered last so it sits visually behind nothing, but with low opacity it acts as a watermark)
+        drawLogoWatermark();
     });
 
     return doc;

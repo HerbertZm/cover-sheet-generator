@@ -58,6 +58,164 @@ h1 {
     color: white;
 }
 
+/* Logo Section */
+.logo-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+}
+
+.logo-section > label {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 600;
+    color: #333;
+    font-size: 1.05em;
+}
+
+.logo-controls {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.logo-upload-area {
+    flex: 0 0 160px;
+}
+
+.logo-placeholder {
+    width: 160px;
+    height: 120px;
+    border: 2px dashed #b0b8c8;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s;
+    background: white;
+    color: #888;
+    font-size: 0.9em;
+    gap: 6px;
+}
+
+.logo-placeholder:hover {
+    border-color: #667eea;
+    color: #667eea;
+    background: #f0f2ff;
+}
+
+.logo-icon {
+    font-size: 2em;
+}
+
+.logo-preview-container {
+    position: relative;
+    width: 160px;
+    height: 120px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #667eea;
+    background: white;
+}
+
+.logo-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 8px;
+}
+
+.logo-remove-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 26px;
+    height: 26px;
+    border: none;
+    background: rgba(220, 53, 69, 0.9);
+    color: white;
+    border-radius: 50%;
+    font-size: 1.1em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: background 0.2s;
+}
+
+.logo-remove-btn:hover {
+    background: #c82333;
+}
+
+.logo-options {
+    flex: 1;
+    min-width: 240px;
+}
+
+.logo-option-label {
+    display: block;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+    font-size: 0.92em;
+}
+
+.position-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.pos-btn {
+    padding: 8px 12px;
+    font-size: 0.88em;
+    border: 2px solid #d0d5dd;
+    background: white;
+    color: #555;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.pos-btn:hover {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.pos-btn.active {
+    border-color: #667eea;
+    background: #667eea;
+    color: white;
+}
+
+.opacity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.opacity-control input[type="range"] {
+    flex: 1;
+    accent-color: #667eea;
+}
+
+.opacity-control span {
+    min-width: 42px;
+    text-align: right;
+    font-weight: 600;
+    color: #555;
+    font-size: 0.92em;
+}
+
 .input-section {
     margin-bottom: 30px;
 }

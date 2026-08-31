@@ -35,20 +35,20 @@
                 <div class="logo-options">
                     <label class="logo-option-label">Position</label>
                     <div class="position-grid">
-                        <button class="pos-btn active" data-pos="top-left" onclick="setLogoPosition('top-left')">&#8598; Top Left</button>
+                        <button class="pos-btn" data-pos="top-left" onclick="setLogoPosition('top-left')">&#8598; Top Left</button>
                         <button class="pos-btn" data-pos="top-right" onclick="setLogoPosition('top-right')">&#8599; Top Right</button>
                         <button class="pos-btn" data-pos="bottom-left" onclick="setLogoPosition('bottom-left')">&#8601; Bottom Left</button>
-                        <button class="pos-btn" data-pos="bottom-right" onclick="setLogoPosition('bottom-right')">&#8600; Bottom Right</button>
+                        <button class="pos-btn active" data-pos="bottom-right" onclick="setLogoPosition('bottom-right')">&#8600; Bottom Right</button>
                     </div>
                     <label class="logo-option-label" for="logo-opacity">Opacity</label>
                     <div class="opacity-control">
-                        <input type="range" id="logo-opacity" min="5" max="50" value="20" oninput="setLogoOpacity(this.value)">
-                        <span id="opacity-value">20%</span>
+                        <input type="range" id="logo-opacity" min="5" max="50" value="25" oninput="setLogoOpacity(this.value)">
+                        <span id="opacity-value">25%</span>
                     </div>
                     <label class="logo-option-label" for="logo-size">Size (mm)</label>
                     <div class="opacity-control">
-                        <input type="range" id="logo-size" min="20" max="120" value="50" oninput="setLogoSize(this.value)">
-                        <span id="size-value">50mm</span>
+                        <input type="range" id="logo-size" min="20" max="120" value="25" oninput="setLogoSize(this.value)">
+                        <span id="size-value">25mm</span>
                     </div>
                 </div>
             </div>

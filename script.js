@@ -237,9 +237,8 @@ function createPDF() {
             }
         }
 
-        // Build title: "DAY - TIME - EVENT NAME FORMAT"
-        const format = event.sealed ? 'Sealed' : 'Constructed';
-        const title = `${selectedDay} - ${timeFormatted} - ${event.name} ${format}`;
+        // Build title: "DAY - TIME - EVENT NAME"
+        const title = `${selectedDay} - ${timeFormatted} - ${event.name}`;
 
         // Title at top (centered, large, bold) with text wrapping
         doc.setFontSize(42);

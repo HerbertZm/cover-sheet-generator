@@ -225,15 +225,19 @@ function createPDF() {
 
         const centerX = pageWidth / 2;
 
-        // Convert time format (e.g., "10:00 AM" -> "10AM" or "2:00 PM" -> "2PM")
+        // Convert time format, dropping only zero minutes
+        // (e.g., "10:00 AM" -> "10AM", "2:00 PM" -> "2PM", "10:30 AM" -> "10:30AM")
         let timeFormatted = event.time || '';
         if (timeFormatted) {
-            // Extract hour and AM/PM
-            const timeMatch = timeFormatted.match(/(\d{1,2}):?\d{0,2}\s*(AM|PM|am|pm)/i);
+            // Extract hour, minutes and AM/PM
+            const timeMatch = timeFormatted.match(/(\d{1,2}):?(\d{2})?\s*(AM|PM)/i);
             if (timeMatch) {
                 const hour = timeMatch[1];
-                const period = timeMatch[2].toUpperCase();
-                timeFormatted = `${hour}${period}`;
+                const minutes = timeMatch[2];
+                const period = timeMatch[3].toUpperCase();
+                timeFormatted = minutes && minutes !== '00'
+                    ? `${hour}:${minutes}${period}`
+                    : `${hour}${period}`;
             }
         }
 
